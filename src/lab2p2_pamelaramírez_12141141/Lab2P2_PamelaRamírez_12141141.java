@@ -44,7 +44,8 @@ public class Lab2P2_PamelaRamírez_12141141 {
             }
             
             case 2: {
-                
+                modificarAnimal();
+                ejecutar();
                 break;
             }
             
@@ -105,8 +106,10 @@ public class Lab2P2_PamelaRamírez_12141141 {
     public static void modificarAnimal(){
         System.out.print("Ingrese el nombre científico del animal a editar: ");
         String nomCie = lea.nextLine();
+        lea.nextLine();
         for (Animal animal : animales) {
-            if (nomCie.equalsIgnoreCase(animal.getNomCie())) {
+            //System.out.println(animal.nomCie);
+            if (nomCie.equalsIgnoreCase(animal.nomCie)) {
                 System.out.print("Opciones de edición:\n"+
                                 "1. Editar un atributo\n"+
                                 "2. Editar todos los atributos\n"+
@@ -116,8 +119,7 @@ public class Lab2P2_PamelaRamírez_12141141 {
                 break;
             }
         }
-        
-        
+        System.out.println();
     }
     
     public static void edicion(int op, int pos){
@@ -138,7 +140,7 @@ public class Lab2P2_PamelaRamírez_12141141 {
             }
             
             case 2: {
-                
+                editarTodo(pos);
                 break;
             }
             
@@ -193,6 +195,41 @@ public class Lab2P2_PamelaRamírez_12141141 {
             }
             
         }
+    }
+    
+    static void editarTodo(int pos){
+        System.out.print("Ingrese el nuevo nombre científico: ");
+        String nomCie = lea.nextLine();
+        nomCie = lea.nextLine();
+        
+        System.out.print("Ingrese el nuevo nombre común: ");
+        String nomCom = lea.next();
+        
+        System.out.print("Ingrese el nuevo hábitat: ");
+        String habitat = lea.nextLine();
+        habitat = lea.nextLine();
+        
+        System.out.print("Ingrese la nueva alimentación: ");
+        String alim = lea.nextLine();
+        
+        System.out.print("Ingrese la nueva descripción: ");
+        String desc = lea.nextLine();
+        
+        System.out.print("Ingrese la nueva distribución geográfica: ");
+        String dist = lea.nextLine();
+        
+        System.out.print("Ingrese la nueva vida: ");
+        int vida = lea.nextInt();
+        
+        animales.get(pos).setNomCie(nomCie);
+        animales.get(pos).setNomCom(nomCom);
+        animales.get(pos).setHabitat(habitat);
+        animales.get(pos).setAlim(alim);
+        animales.get(pos).setDesc(desc);
+        animales.get(pos).setDist(dist);
+        animales.get(pos).setVida(vida);
+        
+        System.out.println("\n" + "Animal editado exitosamente." + "\n");
     }
     
     static void borrarAnimal(){
