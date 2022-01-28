@@ -55,7 +55,7 @@ public class Lab2P2_PamelaRamírez_12141141 {
             }
             
             case 4: {
-                toStringAnimales();
+                imprimir();
                 ejecutar();
                 break;
             }
@@ -117,7 +117,7 @@ public class Lab2P2_PamelaRamírez_12141141 {
     }
     
     public static void modificarAnimal(){
-        System.out.print("Ingrese el nombre científico del animal a editar: ");
+        System.out.print("\nIngrese el nombre científico del animal a editar: ");
         lea.nextLine();
         String nomCie = lea.nextLine();
         int pos = 0;
@@ -126,13 +126,12 @@ public class Lab2P2_PamelaRamírez_12141141 {
         for (Animal animal : animales) {
             if (nomCie.equalsIgnoreCase(animal.nomCie)){
                 pos = animales.indexOf(animal);
-                
                 esta = true;
                 break;
             }
         }
         if (esta) {
-            System.out.print("Opciones de edición:\n"+
+            System.out.print("\nOpciones de edición:\n"+
                             "1. Editar un atributo\n"+
                             "2. Editar todos los atributos\n"+
                             "Ingrese una opción: ");
@@ -178,7 +177,7 @@ public class Lab2P2_PamelaRamírez_12141141 {
         lea.nextLine();
         switch(at){
             case 1: {
-                System.out.print("Ingrese nuevo nombre científico: ");
+                System.out.print("\nIngrese nuevo nombre científico: ");
                 //String dato = lea.nextLine();
                 animales.get(pos).setNomCie(lea.nextLine());
                 break;
@@ -223,7 +222,7 @@ public class Lab2P2_PamelaRamírez_12141141 {
     
     static void editarTodo(int pos){
         lea.nextLine();
-        System.out.print("Ingrese el nuevo nombre científico: ");
+        System.out.print("\nIngrese el nuevo nombre científico: ");
         String nomCie = lea.nextLine();
         nomCie = lea.nextLine();
         
@@ -258,7 +257,7 @@ public class Lab2P2_PamelaRamírez_12141141 {
     }
     
     static void borrarAnimal(){
-        System.out.print("Ingrese el nombre científico del animal a eliminar: ");
+        System.out.print("\nIngrese el nombre científico del animal a eliminar: ");
         lea.nextLine();
         String nomCie = lea.nextLine();
         int pos = 0;
@@ -283,11 +282,43 @@ public class Lab2P2_PamelaRamírez_12141141 {
     }
     
     static void imprimir(){
-        
+        System.out.println("1. Imprimir por posición\n"+
+                "2. Imprimir lista completa\n"+
+                "3. Imprimir por nombre científico");
+        System.out.print("Ingrese una opción: ");
+        opcionImprimir(lea.nextInt());
+    }
+    
+    static void opcionImprimir(int op){
+        switch(op){
+            case 1: {
+                System.out.print("\nIngrese la posición del animal a imprimir: ");
+                int pos = lea.nextInt();
+                if (pos > 0 && pos <= animales.size()) {
+                    imprimirAnimal(pos);
+                }
+                else{
+                    System.out.println("\nLa posición ingresada está fuera de los límites de la lista.\n");
+                }
+                break;
+            }
+            case 2: {
+                
+                break;
+            }
+            case 3: {
+                
+                break;
+            }
+            default: {
+                System.out.println("\n" + "Ingrese una opción válida." + "\n");
+                break;
+            }
+        }
     }
     
     static void alimentarAnimal(){
-        System.out.print("Ingrese la posición del animal a alimentar (1 - " + animales.size() +  "): ");
+        System.out.print("\nIngrese la posición del animal a alimentar (1 - " + animales.size() +  "): ");
         int come = lea.nextInt();
         come--;
         System.out.print("Ingrese la posición del animal devorado (1 - " + animales.size() +  "): ");
@@ -304,7 +335,30 @@ public class Lab2P2_PamelaRamírez_12141141 {
     }
     
     public static void toStringAnimales(){
-        
-        System.out.println(animales);
+        for (Animal a : animales) {
+            int indice = animales.indexOf(a) + 1;
+            System.out.println("\nAnimal " + indice);
+            System.out.println("Nombre Científico: " + a.nomCie);
+            System.out.println("Nombre Común: " + a.nomCom);
+            System.out.println("Hábitat: " + a.habitat);
+            System.out.println("Alimentación: " + a.alim);
+            System.out.println("Descripción: " + a.desc);
+            System.out.println("Distribución geográfica: " + a.dist);
+            System.out.println("Vida actual: " + a.vida);
+            System.out.println("\n");
+        }
+    }
+    
+    public static void imprimirAnimal(int pos){
+        int indice = pos--;
+        System.out.println("\nAnimal " + indice);
+        System.out.println("Nombre Científico: " + animales.get(pos).nomCie);
+        System.out.println("Nombre Común: " + animales.get(pos).nomCom);
+        System.out.println("Hábitat: " + animales.get(pos).habitat);
+        System.out.println("Alimentación: " + animales.get(pos).alim);
+        System.out.println("Descripción: " + animales.get(pos).desc);
+        System.out.println("Distribución geográfica: " + animales.get(pos).dist);
+        System.out.println("Vida actual: " + animales.get(pos).vida);
+        System.out.println("\n\n");
     }
 }
