@@ -77,38 +77,37 @@ public class Lab2P2_PamelaRamírez_12141141 {
         System.out.print("Ingrese el nombre científico: ");
         String nomCie = lea.nextLine();
         nomCie = lea.nextLine();
-        
-        System.out.print("Ingrese el nombre común: ");
-        String nomCom = lea.next();
-        
-        System.out.print("Ingrese el hábitat: ");
-        String habitat = lea.nextLine();
-        habitat = lea.nextLine();
-        
-        System.out.print("Ingrese la alimentación: ");
-        String alim = lea.nextLine();
-        //alim = lea.nextLine();
-        
-        System.out.print("Ingrese la descripción: ");
-        String desc = lea.nextLine();
-        //desc = lea.nextLine();
-        
-        System.out.print("Ingrese la distribución geográfica: ");
-        String dist = lea.nextLine();
-        //dist = lea.nextLine();
-        
-        System.out.print("Ingrese la vida: ");
-        int vida = lea.nextInt();
-        System.out.println("\n" + "Animal agregado exitosamente." + "\n");
-        
         int valid = 0;
         for (Animal a : animales) {
-            if (a.getNomCie() == nomCie) {
+            if (a.getNomCie().equalsIgnoreCase(nomCie)) {
                 valid++;
             }
         }
         if (valid == 0) {
+            System.out.print("Ingrese el nombre común: ");
+            String nomCom = lea.next();
+
+            System.out.print("Ingrese el hábitat: ");
+            String habitat = lea.nextLine();
+            habitat = lea.nextLine();
+
+            System.out.print("Ingrese la alimentación: ");
+            String alim = lea.nextLine();
+            //alim = lea.nextLine();
+
+            System.out.print("Ingrese la descripción: ");
+            String desc = lea.nextLine();
+            //desc = lea.nextLine();
+
+            System.out.print("Ingrese la distribución geográfica: ");
+            String dist = lea.nextLine();
+            //dist = lea.nextLine();
+
+            System.out.print("Ingrese la vida: ");
+            int vida = lea.nextInt();
+        
             animales.add(new Animal(nomCie, nomCom, habitat, alim, desc, dist, vida));
+            System.out.println("\n" + "Animal agregado exitosamente." + "\n");
         }
         else{
             System.out.println("\nNo pueden haber dos animales con el mismo nombre científico.\n");
@@ -282,7 +281,7 @@ public class Lab2P2_PamelaRamírez_12141141 {
     }
     
     static void imprimir(){
-        System.out.println("1. Imprimir por posición\n"+
+        System.out.println("\n1. Imprimir por posición\n"+
                 "2. Imprimir lista completa\n"+
                 "3. Imprimir por nombre científico");
         System.out.print("Ingrese una opción: ");
@@ -292,9 +291,9 @@ public class Lab2P2_PamelaRamírez_12141141 {
     static void opcionImprimir(int op){
         switch(op){
             case 1: {
-                System.out.print("\nIngrese la posición del animal a imprimir: ");
+                System.out.print("\nIngrese la posición del animal a imprimir (1 - " + animales.size() +  "): ");
                 int pos = lea.nextInt();
-                if (pos > 0 && pos <= animales.size()) {
+                if (validarPosición(pos)) {
                     imprimirAnimal(pos);
                 }
                 else{
@@ -303,11 +302,30 @@ public class Lab2P2_PamelaRamírez_12141141 {
                 break;
             }
             case 2: {
-                
+                toStringAnimales();
                 break;
             }
             case 3: {
-                
+                System.out.print("\nIngrese el nombre científico del animal a eliminar: ");
+                lea.nextLine();
+                String nomCie = lea.nextLine();
+                int pos = 0;
+                boolean esta = false;
+
+                for (Animal animal : animales) {
+                    if (nomCie.equalsIgnoreCase(animal.nomCie)){
+                        pos = animales.indexOf(animal);
+                        esta = true;
+                        break;
+                    }
+                }
+                if (esta) {
+                    imprimirAnimal(pos);
+                }
+                else{
+                    System.out.println("\n" + "Animal no encontrado." + "\n");
+                }
+                System.out.println();
                 break;
             }
             default: {
@@ -320,18 +338,31 @@ public class Lab2P2_PamelaRamírez_12141141 {
     static void alimentarAnimal(){
         System.out.print("\nIngrese la posición del animal a alimentar (1 - " + animales.size() +  "): ");
         int come = lea.nextInt();
-        come--;
-        System.out.print("Ingrese la posición del animal devorado (1 - " + animales.size() +  "): ");
-        int comido = lea.nextInt();
-        comido--;
-        if (come != comido) {
-            if ((come >= 0 && come < animales.size()) && (comido >= 0 && comido < animales.size())) {
-                int sumar = animales.get(comido).getVida() + animales.get(come).getVida();
-                animales.get(come).setVida(sumar);
-                animales.remove(comido);
-                System.out.println("\nEl animal fue alimentado exitosamente.\n");
+        
+        //System.out.println(come);
+        if (validarPosición(come)) {
+            come--;
+            System.out.print("Ingrese la posición del animal devorado (1 - " + animales.size() +  "): ");
+            int comido = lea.nextInt();
+            if (validarPosición(comido)) {
+                comido--;
+                if (come != comido) {
+                    if ((come >= 0 && come < animales.size()) && (comido >= 0 && comido < animales.size())) {
+                        int sumar = animales.get(comido).getVida() + animales.get(come).getVida();
+                        animales.get(come).setVida(sumar);
+                        animales.remove(comido);
+                        System.out.println("\nEl animal fue alimentado exitosamente.\n");
+                    }
+                }
+            }
+            else{
+                System.out.println("\nLa posición ingresada está fuera de los límites de la lista.\n");
             }
         }
+        else{
+            System.out.println("\nLa posición ingresada está fuera de los límites de la lista.\n");
+        }
+        
     }
     
     public static void toStringAnimales(){
@@ -359,6 +390,14 @@ public class Lab2P2_PamelaRamírez_12141141 {
         System.out.println("Descripción: " + animales.get(pos).desc);
         System.out.println("Distribución geográfica: " + animales.get(pos).dist);
         System.out.println("Vida actual: " + animales.get(pos).vida);
-        System.out.println("\n\n");
+        System.out.println("\n");
+    }
+    
+    public static boolean validarPosición(int pos){
+        boolean si = false;
+        if (pos > 0 && pos <= animales.size()) {
+            si = true;
+        }
+        return si;
     }
 }
