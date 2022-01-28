@@ -105,9 +105,16 @@ public class Lab2P2_PamelaRamírez_12141141 {
 
             System.out.print("Ingrese la vida: ");
             int vida = lea.nextInt();
+            if (vida > 0) {
+                animales.add(new Animal(nomCie, nomCom, habitat, alim, desc, dist, vida));
+                System.out.println("\n" + "Animal agregado exitosamente." + "\n");
+            }
+            else{
+                System.out.println("\n" + "La vida debe ser mayor a 0." + "\n");
+            }
         
-            animales.add(new Animal(nomCie, nomCom, habitat, alim, desc, dist, vida));
-            System.out.println("\n" + "Animal agregado exitosamente." + "\n");
+            
+            
         }
         else{
             System.out.println("\nNo pueden haber dos animales con el mismo nombre científico.\n");
@@ -208,7 +215,10 @@ public class Lab2P2_PamelaRamírez_12141141 {
             }
             case 7: {
                 System.out.print("Ingrese nueva vida: ");
-                animales.get(pos).setVida(lea.nextInt());
+                int vida = lea.nextInt();
+                if (vida > 0) {
+                    animales.get(pos).setVida(vida);
+                }
                 break;
             }
             default: {
