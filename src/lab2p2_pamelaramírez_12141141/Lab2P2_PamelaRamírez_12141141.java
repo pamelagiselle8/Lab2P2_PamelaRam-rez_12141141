@@ -112,9 +112,6 @@ public class Lab2P2_PamelaRamírez_12141141 {
             else{
                 System.out.println("\n" + "La vida debe ser mayor a 0." + "\n");
             }
-        
-            
-            
         }
         else{
             System.out.println("\nNo pueden haber dos animales con el mismo nombre científico.\n");
@@ -142,7 +139,7 @@ public class Lab2P2_PamelaRamírez_12141141 {
                             "2. Editar todos los atributos\n"+
                             "Ingrese una opción: ");
             edicion(lea.nextInt(), pos);
-            System.out.println("Modificación realizada exitosamente.\n");
+            //System.out.println("Modificación realizada exitosamente.\n");
         }
         else{
             System.out.println("\n" + "Animal no encontrado." + "\n");
@@ -184,7 +181,6 @@ public class Lab2P2_PamelaRamírez_12141141 {
         switch(at){
             case 1: {
                 System.out.print("\nIngrese nuevo nombre científico: ");
-                //String dato = lea.nextLine();
                 animales.get(pos).setNomCie(lea.nextLine());
                 break;
             }
@@ -219,6 +215,9 @@ public class Lab2P2_PamelaRamírez_12141141 {
                 if (vida > 0) {
                     animales.get(pos).setVida(vida);
                 }
+                else{
+                    System.out.println("\n" + "La vida debe ser mayor a 0." + "\n");
+                }
                 break;
             }
             default: {
@@ -233,36 +232,49 @@ public class Lab2P2_PamelaRamírez_12141141 {
         lea.nextLine();
         System.out.print("\nIngrese el nuevo nombre científico: ");
         String nomCie = lea.nextLine();
-        nomCie = lea.nextLine();
-        
-        System.out.print("Ingrese el nuevo nombre común: ");
-        String nomCom = lea.next();
-        
-        System.out.print("Ingrese el nuevo hábitat: ");
-        String habitat = lea.nextLine();
-        habitat = lea.nextLine();
-        
-        System.out.print("Ingrese la nueva alimentación: ");
-        String alim = lea.nextLine();
-        
-        System.out.print("Ingrese la nueva descripción: ");
-        String desc = lea.nextLine();
-        
-        System.out.print("Ingrese la nueva distribución geográfica: ");
-        String dist = lea.nextLine();
-        
-        System.out.print("Ingrese la nueva vida: ");
-        int vida = lea.nextInt();
-        
-        animales.get(pos).setNomCie(nomCie);
-        animales.get(pos).setNomCom(nomCom);
-        animales.get(pos).setHabitat(habitat);
-        animales.get(pos).setAlim(alim);
-        animales.get(pos).setDesc(desc);
-        animales.get(pos).setDist(dist);
-        animales.get(pos).setVida(vida);
-        
-        System.out.println("\n" + "Animal editado exitosamente." + "\n");
+        //nomCie = lea.nextLine();
+        int valid = 0;
+        for (Animal a : animales) {
+            if (a.getNomCie().equalsIgnoreCase(nomCie)) {
+                valid++;
+            }
+        }
+        if (valid == 0) {
+            System.out.print("Ingrese el nuevo nombre común: ");
+            String nomCom = lea.next();
+
+            System.out.print("Ingrese el nuevo hábitat: ");
+            String habitat = lea.nextLine();
+            habitat = lea.nextLine();
+
+            System.out.print("Ingrese la nueva alimentación: ");
+            String alim = lea.nextLine();
+
+            System.out.print("Ingrese la nueva descripción: ");
+            String desc = lea.nextLine();
+
+            System.out.print("Ingrese la nueva distribución geográfica: ");
+            String dist = lea.nextLine();
+
+            System.out.print("Ingrese la nueva vida: ");
+            int vida = lea.nextInt();
+            if (vida > 0) {
+                animales.get(pos).setNomCie(nomCie);
+                animales.get(pos).setNomCom(nomCom);
+                animales.get(pos).setHabitat(habitat);
+                animales.get(pos).setAlim(alim);
+                animales.get(pos).setDesc(desc);
+                animales.get(pos).setDist(dist);
+                animales.get(pos).setVida(vida);
+                System.out.println("\n" + "Animal editado exitosamente." + "\n");
+            }
+            else{
+                System.out.println("\n" + "La vida debe ser mayor a 0." + "\n");
+            }
+        }
+        else{
+            System.out.println("\nNo pueden haber dos animales con el mismo nombre científico.\n");
+        }
     }
     
     static void borrarAnimal(){
