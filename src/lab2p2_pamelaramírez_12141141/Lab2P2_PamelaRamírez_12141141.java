@@ -31,7 +31,6 @@ public class Lab2P2_PamelaRamírez_12141141 {
                         "5. Alimentar animal\n" +
                         "0. Salir\n" +
                         "Ingrese una opcion: ");
-        System.out.println();
         return lea.nextInt();
     }
     
@@ -50,7 +49,8 @@ public class Lab2P2_PamelaRamírez_12141141 {
             }
             
             case 3: {
-                
+                borrarAnimal();
+                ejecutar();
                 break;
             }
             
@@ -61,7 +61,8 @@ public class Lab2P2_PamelaRamírez_12141141 {
             }
             
             case 5: {
-                
+                alimentarAnimal();
+                ejecutar();
                 break;
             }
             
@@ -117,19 +118,29 @@ public class Lab2P2_PamelaRamírez_12141141 {
     
     public static void modificarAnimal(){
         System.out.print("Ingrese el nombre científico del animal a editar: ");
-        String nomCie = lea.nextLine();
         lea.nextLine();
+        String nomCie = lea.nextLine();
+        int pos = 0;
+        boolean esta = false;
+        
         for (Animal animal : animales) {
-            //System.out.println(animal.nomCie);
             if (nomCie.equalsIgnoreCase(animal.nomCie)){
-                System.out.print("Opciones de edición:\n"+
-                                "1. Editar un atributo\n"+
-                                "2. Editar todos los atributos\n"+
-                                "Ingrese una opción: ");
-                edicion(lea.nextInt(), animales.indexOf(animal));
-                System.out.println("Modificación realizada exitosamente.\n");
+                pos = animales.indexOf(animal);
+                
+                esta = true;
                 break;
             }
+        }
+        if (esta) {
+            System.out.print("Opciones de edición:\n"+
+                            "1. Editar un atributo\n"+
+                            "2. Editar todos los atributos\n"+
+                            "Ingrese una opción: ");
+            edicion(lea.nextInt(), pos);
+            System.out.println("Modificación realizada exitosamente.\n");
+        }
+        else{
+            System.out.println("\n" + "Animal no encontrado." + "\n");
         }
         System.out.println();
     }
@@ -164,6 +175,7 @@ public class Lab2P2_PamelaRamírez_12141141 {
     }
     
     public static void editarAtributo(int at, int pos){
+        lea.nextLine();
         switch(at){
             case 1: {
                 System.out.print("Ingrese nuevo nombre científico: ");
@@ -210,6 +222,7 @@ public class Lab2P2_PamelaRamírez_12141141 {
     }
     
     static void editarTodo(int pos){
+        lea.nextLine();
         System.out.print("Ingrese el nuevo nombre científico: ");
         String nomCie = lea.nextLine();
         nomCie = lea.nextLine();
@@ -246,14 +259,26 @@ public class Lab2P2_PamelaRamírez_12141141 {
     
     static void borrarAnimal(){
         System.out.print("Ingrese el nombre científico del animal a eliminar: ");
-        String nomCie = lea.nextLine();
         lea.nextLine();
+        String nomCie = lea.nextLine();
+        int pos = 0;
+        boolean esta = false;
+        
         for (Animal animal : animales) {
-            if (nomCie.equalsIgnoreCase(animales.get(animales.indexOf(animal)).getNomCie())) {
-                animales.remove(animales.indexOf(animal));
+            if (nomCie.equalsIgnoreCase(animal.nomCie)){
+                pos = animales.indexOf(animal);
+                esta = true;
                 break;
             }
         }
+        if (esta) {
+            animales.remove(pos);
+            System.out.println("El animal ha sido eliminado exitosamente.\n");
+        }
+        else{
+            System.out.println("\n" + "Animal no encontrado." + "\n");
+        }
+        System.out.println();
         
     }
     
@@ -262,10 +287,24 @@ public class Lab2P2_PamelaRamírez_12141141 {
     }
     
     static void alimentarAnimal(){
-        
+        System.out.print("Ingrese la posición del animal a alimentar (1 - " + animales.size() +  "): ");
+        int come = lea.nextInt();
+        come--;
+        System.out.print("Ingrese la posición del animal devorado (1 - " + animales.size() +  "): ");
+        int comido = lea.nextInt();
+        comido--;
+        if (come != comido) {
+            if ((come >= 0 && come < animales.size()) && (comido >= 0 && comido < animales.size())) {
+                int sumar = animales.get(comido).getVida() + animales.get(come).getVida();
+                animales.get(come).setVida(sumar);
+                animales.remove(comido);
+                System.out.println("\nEl animal fue alimentado exitosamente.\n");
+            }
+        }
     }
     
     public static void toStringAnimales(){
+        
         System.out.println(animales);
     }
 }
