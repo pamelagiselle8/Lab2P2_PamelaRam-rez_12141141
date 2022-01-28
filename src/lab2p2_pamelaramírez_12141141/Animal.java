@@ -8,20 +8,20 @@ public class Animal {
     String habitat = "";
     String alim = "";
     String desc = "";
-    String distGeo = "";
+    String dist = "";
     int vida = 0;
     
     public Animal(){
         
     }
     
-    public Animal(String nomCie, String nomCom, String habitat, String alim, String desc, String distGeo, int vida){
+    public Animal(String nomCie, String nomCom, String habitat, String alim, String desc, String dist, int vida){
         this.nomCie = nomCie;
         this.nomCom = nomCom;
         this.habitat = habitat;
         this.alim = alim;
         this.desc = desc;
-        this.distGeo = distGeo;
+        this.dist = dist;
         this.vida = vida;
     }
 
@@ -65,12 +65,12 @@ public class Animal {
         this.desc = desc;
     }
 
-    public String getDistGeo() {
-        return distGeo;
+    public String getDist() {
+        return dist;
     }
 
-    public void setDistGeo(String distGeo) {
-        this.distGeo = distGeo;
+    public void setDist(String dist) {
+        this.dist = dist;
     }
 
     public int getVida() {
@@ -81,5 +81,8 @@ public class Animal {
         this.vida = vida;
     }
     
+    public String toString(){
+        return "Nombre científico: " + nomCie + ", nombre común: " + nomCom + ", hábitat: " + habitat + ", alimentación: " + alim + ", descripción: " + desc + ", distribución geográfica: " + dist + ", vida: " + vida + "." + "\n";
+    }
     
 }
