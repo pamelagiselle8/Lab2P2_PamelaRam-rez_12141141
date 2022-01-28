@@ -100,7 +100,19 @@ public class Lab2P2_PamelaRamírez_12141141 {
         int vida = lea.nextInt();
         System.out.println("\n" + "Animal agregado exitosamente." + "\n");
         
-        animales.add(new Animal(nomCie, nomCom, habitat, alim, desc, dist, vida));
+        int valid = 0;
+        for (Animal a : animales) {
+            if (a.getNomCie() == nomCie) {
+                valid++;
+            }
+        }
+        if (valid == 0) {
+            animales.add(new Animal(nomCie, nomCom, habitat, alim, desc, dist, vida));
+        }
+        else{
+            System.out.println("\nNo pueden haber dos animales con el mismo nombre científico.\n");
+        }
+        
     }
     
     public static void modificarAnimal(){
@@ -109,7 +121,7 @@ public class Lab2P2_PamelaRamírez_12141141 {
         lea.nextLine();
         for (Animal animal : animales) {
             //System.out.println(animal.nomCie);
-            if (nomCie.equalsIgnoreCase(animal.nomCie)) {
+            if (nomCie.equalsIgnoreCase(animal.nomCie)){
                 System.out.print("Opciones de edición:\n"+
                                 "1. Editar un atributo\n"+
                                 "2. Editar todos los atributos\n"+
@@ -233,6 +245,15 @@ public class Lab2P2_PamelaRamírez_12141141 {
     }
     
     static void borrarAnimal(){
+        System.out.print("Ingrese el nombre científico del animal a eliminar: ");
+        String nomCie = lea.nextLine();
+        lea.nextLine();
+        for (Animal animal : animales) {
+            if (nomCie.equalsIgnoreCase(animales.get(animales.indexOf(animal)).getNomCie())) {
+                animales.remove(animales.indexOf(animal));
+                break;
+            }
+        }
         
     }
     
