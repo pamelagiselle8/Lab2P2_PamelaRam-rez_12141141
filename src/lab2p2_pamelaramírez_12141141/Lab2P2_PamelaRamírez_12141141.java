@@ -24,7 +24,7 @@ public class Lab2P2_PamelaRamírez_12141141 {
     }
     
     public static int menu(){
-        System.out.print("1. Agregar animal\n" +
+        System.out.print("\n1. Agregar animal\n" +
                         "2. Modificar animal\n" +
                         "3. Eliminar animal\n" +
                         "4. Opciones de impresión\n" +
@@ -74,7 +74,7 @@ public class Lab2P2_PamelaRamírez_12141141 {
     }
     
     public static void agregarAnimal(){
-        System.out.print("Ingrese el nombre científico: ");
+        System.out.print("\nIngrese el nombre científico: ");
         String nomCie = lea.nextLine();
         nomCie = lea.nextLine();
         int valid = 0;
@@ -84,7 +84,7 @@ public class Lab2P2_PamelaRamírez_12141141 {
             }
         }
         if (valid == 0) {
-            System.out.print("Ingrese el nombre común: ");
+            System.out.print("\nIngrese el nombre común: ");
             String nomCom = lea.next();
 
             System.out.print("Ingrese el hábitat: ");
@@ -150,7 +150,7 @@ public class Lab2P2_PamelaRamírez_12141141 {
     public static void edicion(int op, int pos){
         switch(op){
             case 1: {
-                System.out.println("Atributos:\n"+
+                System.out.print("\nAtributos:\n"+
                         "1. Nombre científico\n" +
                         "2. Nombre común\n" +
                         "3. Habitat\n" +
@@ -180,37 +180,49 @@ public class Lab2P2_PamelaRamírez_12141141 {
         lea.nextLine();
         switch(at){
             case 1: {
-                System.out.print("\nIngrese nuevo nombre científico: ");
-                animales.get(pos).setNomCie(lea.nextLine());
+                System.out.print("\nIngrese el nuevo nombre científico: ");
+                String nomCie = lea.nextLine();
+                int valid = 0;
+                for (Animal a : animales) {
+                    if (a.getNomCie().equalsIgnoreCase(nomCie)) {
+                        valid++;
+                    }
+                }
+                if (valid == 0) {
+                    animales.get(pos).setNomCie(nomCie);
+                }
+                else{
+                    System.out.println("\nNo pueden haber dos animales con el mismo nombre científico.\n");
+                }
                 break;
             }
             case 2: {
-                System.out.print("Ingrese nuevo nombre común: ");
+                System.out.print("\nIngrese nuevo nombre común: ");
                 animales.get(pos).setNomCom(lea.nextLine());
                 break;
             }
             case 3: {
-                System.out.print("Ingrese nuevo hábitat: ");
+                System.out.print("\nIngrese nuevo hábitat: ");
                 animales.get(pos).setHabitat(lea.nextLine());
                 break;
             }
             case 4: {
-                System.out.print("Ingrese nueva alimentación: ");
+                System.out.print("\nIngrese nueva alimentación: ");
                 animales.get(pos).setAlim(lea.nextLine());
                 break;
             }
             case 5: {
-                System.out.print("Ingrese nueva descripción: ");
+                System.out.print("\nIngrese nueva descripción: ");
                 animales.get(pos).setDesc(lea.nextLine());
                 break;
             }
             case 6: {
-                System.out.print("Ingrese nueva distribución geográfica: ");
+                System.out.print("\nIngrese nueva distribución geográfica: ");
                 animales.get(pos).setDist(lea.nextLine());
                 break;
             }
             case 7: {
-                System.out.print("Ingrese nueva vida: ");
+                System.out.print("\nIngrese nueva vida: ");
                 int vida = lea.nextInt();
                 if (vida > 0) {
                     animales.get(pos).setVida(vida);
