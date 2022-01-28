@@ -24,15 +24,14 @@ public class Lab2P2_PamelaRamírez_12141141 {
     }
     
     public static int menu(){
-        System.out.println("");
-        System.out.println("");
-        System.out.println("1. Agregar animal\n" +
-                            "2. Modificar animal\n" +
-                            "3. Eliminar animal\n" +
-                            "4. Opciones de impresión\n" +
-                            "5. Alimentar animal\n" +
-                            "0. Salir\n" +
-                            "Ingrese una opcion: ");
+        System.out.print("1. Agregar animal\n" +
+                        "2. Modificar animal\n" +
+                        "3. Eliminar animal\n" +
+                        "4. Opciones de impresión\n" +
+                        "5. Alimentar animal\n" +
+                        "0. Salir\n" +
+                        "Ingrese una opcion: ");
+        System.out.println();
         return lea.nextInt();
     }
     
@@ -56,6 +55,7 @@ public class Lab2P2_PamelaRamírez_12141141 {
             
             case 4: {
                 toStringAnimales();
+                ejecutar();
                 break;
             }
             
@@ -85,15 +85,15 @@ public class Lab2P2_PamelaRamírez_12141141 {
         
         System.out.print("Ingrese la alimentación: ");
         String alim = lea.nextLine();
-        alim = lea.nextLine();
+        //alim = lea.nextLine();
         
         System.out.print("Ingrese la descripción: ");
         String desc = lea.nextLine();
-        desc = lea.nextLine();
+        //desc = lea.nextLine();
         
         System.out.print("Ingrese la distribución geográfica: ");
         String dist = lea.nextLine();
-        dist = lea.nextLine();
+        //dist = lea.nextLine();
         
         System.out.print("Ingrese la vida: ");
         int vida = lea.nextInt();
@@ -103,7 +103,96 @@ public class Lab2P2_PamelaRamírez_12141141 {
     }
     
     public static void modificarAnimal(){
+        System.out.print("Ingrese el nombre científico del animal a editar: ");
+        String nomCie = lea.nextLine();
+        for (Animal animal : animales) {
+            if (nomCie.equalsIgnoreCase(animal.getNomCie())) {
+                System.out.print("Opciones de edición:\n"+
+                                "1. Editar un atributo\n"+
+                                "2. Editar todos los atributos\n"+
+                                "Ingrese una opción: ");
+                edicion(lea.nextInt(), animales.indexOf(animal));
+                System.out.println("Modificación realizada exitosamente.\n");
+                break;
+            }
+        }
         
+        
+    }
+    
+    public static void edicion(int op, int pos){
+        switch(op){
+            case 1: {
+                System.out.println("Atributos:\n"+
+                        "1. Nombre científico\n" +
+                        "2. Nombre común\n" +
+                        "3. Habitat\n" +
+                        "4. Alimentación\n" +
+                        "5. Descripción\n" +
+                        "6. Distribución geográfica\n" +
+                        "7. Vida\n" +
+                        "Ingrese una opcion: ");
+                System.out.println();
+                editarAtributo(lea.nextInt(), pos);
+                break;
+            }
+            
+            case 2: {
+                
+                break;
+            }
+            
+            default: {
+                System.out.println("\n" + "Ingrese una opción válida." + "\n");
+                break;
+            }
+        }
+    }
+    
+    public static void editarAtributo(int at, int pos){
+        switch(at){
+            case 1: {
+                System.out.print("Ingrese nuevo nombre científico: ");
+                //String dato = lea.nextLine();
+                animales.get(pos).setNomCie(lea.nextLine());
+                break;
+            }
+            case 2: {
+                System.out.print("Ingrese nuevo nombre común: ");
+                animales.get(pos).setNomCom(lea.nextLine());
+                break;
+            }
+            case 3: {
+                System.out.print("Ingrese nuevo hábitat: ");
+                animales.get(pos).setHabitat(lea.nextLine());
+                break;
+            }
+            case 4: {
+                System.out.print("Ingrese nueva alimentación: ");
+                animales.get(pos).setAlim(lea.nextLine());
+                break;
+            }
+            case 5: {
+                System.out.print("Ingrese nueva descripción: ");
+                animales.get(pos).setDesc(lea.nextLine());
+                break;
+            }
+            case 6: {
+                System.out.print("Ingrese nueva distribución geográfica: ");
+                animales.get(pos).setDist(lea.nextLine());
+                break;
+            }
+            case 7: {
+                System.out.print("Ingrese nueva vida: ");
+                animales.get(pos).setVida(lea.nextInt());
+                break;
+            }
+            default: {
+                System.out.println("\n" + "Ingrese una opción válida." + "\n");
+                break;
+            }
+            
+        }
     }
     
     static void borrarAnimal(){
